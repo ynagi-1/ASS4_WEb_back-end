@@ -60,6 +60,53 @@ npm start
 http://localhost:3000
 ```
 
+## 🔑 Getting JWT Token
+
+You need a JWT token to access protected endpoints (creating/updating/deleting lots and categories).
+
+### Step 1: Register or Login
+
+**Register a new user:**
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"example@mail.ru","password":******}'
+```
+
+**Or login with existing user:**
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"example@mail.ru","password":"********"}'
+```
+
+### Step 2: Copy the Token
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "...",
+      "email": "admin@test.com",
+      "role": "admin"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+Copy the `token` value from the response.
+
+### Step 3: Use the Token
+
+Add the token to your request headers and to the .env file:
+```
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+
 ## 📚 API Endpoints
 
 ### Authentication
